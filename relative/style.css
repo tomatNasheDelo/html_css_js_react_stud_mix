@@ -1,0 +1,40 @@
+.parent {
+
+    width: 300px;
+    height: 200px;
+    background: #ddd;
+    border: 2px solid #333;
+    margin: 50px;
+}
+
+.box {
+    width: 150px;
+    height: 80px;
+}
+
+.blue {
+    background: dodgerblue;
+}
+
+.red {
+    background: tomato;
+}
+
+/* relative: сдвиг от СВОЕГО обычного места */
+.rel {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+/* absolute: позиция относительно ближайшего предка с position */
+.abs {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* делаем родителя "точкой отсчёта" для absolute */
+.parent-relative {
+    position: relative;
+}

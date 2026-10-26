@@ -1,0 +1,48 @@
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сравнение relative и absolute</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Демонстрация позиционирования CSS</h1>
+
+    <div class="controls">
+        <button id="colorBtn">Перехватить CSS и изменить цвет</button>
+    </div>
+
+    <div class="container">
+
+        <!-- Секция Relative -->
+        <div class="section">
+            <h2>1. position: relative</h2>
+            <p class="desc">Блок смещается, но оставляет пустое место на прежней позиции.</p>
+
+            <div class="parent">
+                <div class="box base">Обычный 1</div>
+                <div class="box relative-box" id="relBox">Relative (top: 20px, left: 20px)</div>
+                <div class="box base">Обычный 2</div>
+            </div>
+        </div>
+
+        <!-- Секция Absolute -->
+        <div class="section">
+            <h2>2. position: absolute</h2>
+            <p class="desc">Блок выпадает из потока. "Обычный 2" встал на его прежнее место.</p>
+
+            <div class="parent relative-parent">
+                <div class="box base">Обычный 1</div>
+                <div class="box absolute-box" id="absBox">Absolute (top: 20px, left: 20px)</div>
+                <div class="box base">Обычный 2</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

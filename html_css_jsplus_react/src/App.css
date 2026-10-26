@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+#addElementBtn {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+#addElementBtn:hover {
+  background: linear-gradient(45deg, #45a049, #4CAF50);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+#colorElementBtn {
+  background: linear-gradient(45deg, #FF6B6B, #ee5a24);
+}
+
+#colorElementBtn:hover {
+  background: linear-gradient(45deg, #ee5a24, #FF6B6B);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+#clearBtn {
+  background: linear-gradient(45deg, #6c757d, #5a6268);
+}
+
+#clearBtn:hover {
+  background: linear-gradient(45deg, #5a6268, #6c757d);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.elements-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 200px;
+  padding: 20px;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  background: #f8f9fa;
+}
+
+/* Базовый стиль для динамически добавленных элементов */
+.dynamic-element {
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: slideIn 0.5s ease-out;
+}
+
+/* CSS класс для окрашивания элементов - это ключевая часть демонстрации */
+.colored-element {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border-color: #667eea;
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.colored-element::before {
+  content: "✨";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+}
+
+/* Анимация появления */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}

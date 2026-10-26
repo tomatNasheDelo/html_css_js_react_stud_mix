@@ -1,0 +1,102 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1e88e5;
+}
+
+/* Сетка для сравнения двух секций */
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 320px;
+}
+
+.desc {
+    font-size: 13px;
+    color: #666;
+    min-height: 36px;
+}
+
+/* Родительский контейнер-рамка */
+.parent {
+    background-color: #e0e0e0;
+    border: 2px dashed #999;
+    padding: 10px;
+    min-height: 220px;
+}
+
+/* Родитель с relative для ограничения absolute */
+.relative-parent {
+    position: relative;
+}
+
+/* Базовые стили для всех кубиков */
+.box {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.base {
+    background-color: #cfd8dc;
+    color: #37474f;
+}
+
+/* 1. Relative кубик */
+.relative-box {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    background-color: #ff9800;
+    color: white;
+}
+
+/* 2. Absolute кубик */
+.absolute-box {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #e91e63;
+    color: white;
+    width: calc(100% - 44px);
+    /* Чтобы по ширине вписался в родителя */
+}

@@ -1,0 +1,31 @@
+/* селектор по тегу: действует на ВСЕ <h1> на странице */
+h1 {
+    color: dodgerblue;
+    font-size: 32px;
+}
+
+/* на ВСЕ абзацы <p> */
+p {
+    color: #333;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+/* на ВСЕ элементы списка <li> */
+li {
+    color: tomato;
+    font-weight: bold;
+}
+
+/* на ВСЕ ссылки <a> */
+a {
+    color: green;
+    text-decoration: none;
+}
+
+/* несколько тегов через запятую: одно правило для обоих */
+h2,
+h3 {
+    color: purple;
+    border-bottom: 2px solid purple;
+}

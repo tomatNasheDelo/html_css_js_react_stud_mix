@@ -1,0 +1,42 @@
+body {
+    font-family: sans-serif;
+}
+
+.buttonN {
+
+    display: inline-block;
+    padding: 10px 20px;
+    background: dodgerblue;
+    color: white;
+    border-radius: 6px;
+    /*   text-decoration: none; */
+
+}
+
+
+.buttonN:hover {
+    background: navy;
+}
+
+li:hover {
+    background: lightyellow;
+}
+
+li:first-child {
+    color: tomato;
+    font-weight: bold;
+}
+
+li:last-child {
+    color: green;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background: #eee;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid orange;
+}

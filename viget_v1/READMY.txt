@@ -1,0 +1,242 @@
+Вот базовая версия виджета в трёх файлах. Пока он работает без бэкенда:
+ ответ оператора имитируется. Вся работа с сервером вынесена в одну 
+ функцию `sendToServer`, поэтому позже вы замените её на WebSocket,
+  не трогая остальной код.
+
+Структура:
+```
+widget/
+├── index.html
+├── style.css
+└── widget.js
+```
+
+**index.html**
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо чат-виджета</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Моя страница</h1>
+  <p>Здесь содержимое сайта.</p>
+
+  <!-- Кнопка открытия чата -->
+  <button id="chat-toggle" aria-label="Открыть чат">💬</button>
+
+  <!-- Окно чата -->
+  <div id="chat-window" class="hidden">
+    <div class="chat-header">
+      <span>Чат с оператором</span>
+      <button id="chat-close" aria-label="Закрыть">×</button>
+    </div>
+
+    <div id="chat-messages"></div>
+
+    <form id="chat-form" autocomplete="off">
+      <input id="chat-input" type="text" placeholder="Введите сообщение..." maxlength="1000">
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+
+  <script src="widget.js"></script>
+</body>
+</html>
+```
+
+**style.css**
+```css
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 24px;
+}
+
+/* Кнопка-иконка в углу */
+#chat-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: #2f80ed;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Окно чата */
+#chat-window {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  width: 320px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+#chat-window.hidden { display: none; }
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #2f80ed;
+  color: #fff;
+  font-weight: 600;
+}
+
+#chat-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Список сообщений */
+#chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f5f6f8;
+}
+
+.message {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: #2f80ed;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.message.operator {
+  align-self: flex-start;
+  background: #fff;
+  color: #222;
+  border-bottom-left-radius: 4px;
+}
+
+/* Форма ввода */
+#chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid #e3e5e8;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+#chat-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2f80ed;
+  color: #fff;
+  cursor: pointer;
+}
+```
+
+**widget.js**
+```javascript
+const toggleBtn = document.getElementById('chat-toggle');
+const closeBtn  = document.getElementById('chat-close');
+const chatWindow = document.getElementById('chat-window');
+const messagesEl = document.getElementById('chat-messages');
+const form  = document.getElementById('chat-form');
+const input = document.getElementById('chat-input');
+
+// Открыть / закрыть окно
+toggleBtn.addEventListener('click', () => {
+  chatWindow.classList.toggle('hidden');
+  if (!chatWindow.classList.contains('hidden')) input.focus();
+});
+closeBtn.addEventListener('click', () => chatWindow.classList.add('hidden'));
+
+// Добавить сообщение в окно. sender: 'user' или 'operator'
+function addMessage(text, sender) {
+  const el = document.createElement('div');
+  el.className = `message ${sender}`;
+  el.textContent = text; // textContent, а не innerHTML — защита от XSS
+  messagesEl.appendChild(el);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+// ВРЕМЕННАЯ ЗАГЛУШКА: сюда позже придёт WebSocket
+function sendToServer(text) {
+  setTimeout(() => {
+    receiveFromServer('Оператор: получил ваше сообщение «' + text + '»');
+  }, 800);
+}
+
+// Эту функцию позже вызовет ws.onmessage
+function receiveFromServer(text) {
+  addMessage(text, 'operator');
+}
+
+// Отправка формы
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, 'user');
+  sendToServer(text);
+  input.value = '';
+});
+
+// Приветствие
+addMessage('Здравствуйте! Чем можем помочь?', 'operator');
+```
+
+**Как запустить.** Положите три файла в одну папку и откройте `index.html`
+ в браузере. Либо запустите в этой папке `python3 -m http.server 8000` и откройте
+  `http://localhost:8000`.
+
+**Как подключится WebSocket позже.** Заглушка заменяется примерно так:
+```javascript
+const ws = new WebSocket('ws://localhost:8080/chat');
+ws.onmessage = (event) => receiveFromServer(event.data);
+
+function sendToServer(text) {
+  ws.send(text);
+}
+```
+На стороне Java это будет WebSocket-эндпоинт (например, Spring `TextWebSocketHandler`),
+ который принимает сообщение и пересылает его в Telegram-чат оператора через Bot API.
+  Ответ оператора идёт обратно по тому же соединению.
+
+Следующий шаг, если хотите: добавить идентификатор сессии посетителя, 
+чтобы оператор в Telegram видел, кому именно отвечает, 
+и автоматическое переподключение WebSocket при обрыве.

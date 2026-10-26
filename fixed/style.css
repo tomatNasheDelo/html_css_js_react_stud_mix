@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content p {
+    margin-bottom: 40px;
+}
+
+/* fixed: позиция относительно ОКНА браузера, не родителя */
+.fixed-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    background: tomato;
+    color: white;
+    text-align: center;
+    line-height: 120px;
+}

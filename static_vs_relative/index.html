@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Static vs Relative</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Демонстрация позиционирования</h1>
+
+    <div class="container">
+        <h2>position: static (по умолчанию)</h2>
+        <div class="box static-box">Я static</div>
+        <div class="box static-box shifted">У меня top: 20px; left: 30px — но это НЕ работает!</div>
+        <div class="box static-box">Я соседний блок</div>
+    </div>
+
+    <div class="container">
+        <h2>position: relative</h2>
+        <div class="box relative-box">Я relative</div>
+        <div class="box relative-box shifted-relative">У меня top: 20px; left: 30px — сдвинулся!</div>
+        <div class="box relative-box">Я соседний блок (место первого сохранено)</div>
+    </div>
+
+    <button id="toggleBtn">Показать/скрыть красную рамку у сдвинутых блоков</button>
+    <p id="hint">Нажмите кнопку, чтобы увидеть, какое место блок занимает в потоке документа.</p>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

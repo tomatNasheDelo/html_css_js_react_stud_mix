@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.intro {
+    height: 200px;
+    background: #eee;
+    padding: 20px;
+}
+
+/* sticky: обычный элемент, пока не дойдёт до top: 0, потом прилипает */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background: dodgerblue;
+    color: white;
+    padding: 15px 20px;
+    font-size: 20px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content p {
+    margin-bottom: 40px;
+}

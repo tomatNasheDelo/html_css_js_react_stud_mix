@@ -1,0 +1,25 @@
+p {
+    font-family: sans-serif;
+    padding: 10px;
+}
+
+.note {
+    background: lightyellow;
+    border-left: 5px solid orange;
+}
+
+.important {
+    color: tomato;
+    font-weight: bold;
+}
+
+#main-title {
+    color: dodgerblue;
+    text-align: center;
+    font-size: 36px;
+}
+
+li.done {
+    text-decoration: line-through;
+    color: grav;
+}
